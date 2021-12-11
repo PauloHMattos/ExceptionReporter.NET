@@ -8,6 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ExceptionReporter.WPF\ExceptionReporter.WPF.csproj" />
+	<ProjectReference Include="..\..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

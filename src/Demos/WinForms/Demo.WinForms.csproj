@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ExceptionReporter.WinForms\ExceptionReporter.WinForms.csproj" />
+	<ProjectReference Include="..\..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Management" Version="6.0.0" />

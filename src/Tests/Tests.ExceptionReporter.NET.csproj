@@ -12,14 +12,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
-		<None Remove="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ExceptionReporter.WinForms\ExceptionReporter.WinForms.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="C:\code\ExceptionReporter.NET\ExceptionReporter.Shared\Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-    </Compile>
+	<ProjectReference Include="..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" />
   </ItemGroup>
 </Project>
