@@ -25,7 +25,7 @@ jobs:
         dotnet-version: 5.0.100
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
-        NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
+        NUGET_AUTH_TOKEN: ${{ github.token }}
 
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
@@ -35,5 +35,3 @@ jobs:
 
     - name: Publish the package to GPR
       run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg"
-      env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
