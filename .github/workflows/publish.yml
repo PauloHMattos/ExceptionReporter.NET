@@ -30,6 +30,10 @@ jobs:
     - name: Pack Managed Libraries
       run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
-    - name: Publish the package to GPR
-      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --api-key ${{github.token}} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
-      #run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --
+    - name: 'Dotnet NuGet Add Source'
+      run: dotnet nuget add source https://nuget.pkg.github.com/PauloHMattos/index.json --name GitHub --username PauloHMattos --password ${{secrets.GITHUB_TOKEN}}
+      shell: pwsh
+      
+    - name: 'Dotnet NuGet Push'
+      run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+      shell: pwsh
