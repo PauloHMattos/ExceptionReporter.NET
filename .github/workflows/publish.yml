@@ -23,7 +23,10 @@ jobs:
 
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
-
+      
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+      
     - name: Pack
       run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:PackageVersion=${{github.event.inputs.version}} -p:OutputPath=.dist -t:restore -p:RestorePackagesConfig=true
 
