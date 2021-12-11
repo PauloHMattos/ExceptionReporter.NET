@@ -27,11 +27,12 @@ jobs:
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
       
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+    #- name: Add msbuild to PATH
+    #  uses: microsoft/setup-msbuild@v1.1
 
     - name: Pack Managed Libraries
-      run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:OutputPath=.dist -p:PackageVersion=${{github.event.inputs.version}}
+      run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
     - name: Publish the package to GPR
-      run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg
+      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg"
+      #run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg
