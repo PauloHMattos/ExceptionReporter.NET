@@ -31,8 +31,5 @@ jobs:
       run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
     - name: Publish the package to GPR
-      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --api-key $NUGET_KEY --source $NUGET_SOURCE --skip-duplicate
-      env:
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        NUGET_SOURCE: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --api-key ${{github.token}} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
       #run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --
