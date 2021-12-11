@@ -34,5 +34,5 @@ jobs:
       run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
     - name: Publish the package to GPR
-      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg"
+      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg"
       #run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg
