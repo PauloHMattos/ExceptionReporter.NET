@@ -26,12 +26,9 @@ jobs:
         
     - name: Restore
       run: dotnet restore
-      
-    - name: 'Build'
-      run: dotnet build --configuration Release --no-restore
-    
+
     - name: Pack Managed Libraries
-      run: dotnet pack --no-build src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
+      run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
     - name: 'Dotnet NuGet Add Source'
       run: dotnet nuget add source https://nuget.pkg.github.com/PauloHMattos/index.json --name GitHub --username PauloHMattos --password ${{secrets.GITHUB_TOKEN}}
