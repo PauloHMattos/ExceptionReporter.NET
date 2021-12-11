@@ -36,6 +36,6 @@ jobs:
     - name: Publish the package to GPR
       run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" -k $NUGET_KEY -s $NUGET_SOURCE --skip-duplicate
       env:
-        NUGET_KEY: ${{secrets.GITHUB_TOKEN}}
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         NUGET_SOURCE: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       #run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --
