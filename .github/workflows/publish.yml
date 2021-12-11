@@ -1,7 +1,5 @@
 name: Publish to Registry
 
-name: publish-packages
-
 on: 
   workflow_dispatch:
     inputs:
