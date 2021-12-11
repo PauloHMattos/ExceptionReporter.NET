@@ -22,11 +22,11 @@ jobs:
         dotnet-version: 5.0.100
 
     - name: Restore
-      run: dotnet restore src/ExceptionReporter.NET.sln
+      run: dotnet restore ExceptionReporter.NET.sln
 
     - name: Pack
       run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:PackageVersion=${{github.event.inputs.version}} -p:OutputPath=.dist -t:restore -p:RestorePackagesConfig=true
 
     - name: Push
-      run: dotnet nuget push src/D2DLibExport/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg --api-key ${{secrets.NUGET_API_KEY}} -s https://nuget.pkg.github.com/LAMCSO/index.json --skip-duplicate
+      run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg --api-key ${{secrets.NUGET_API_KEY}} -s https://nuget.pkg.github.com/PauloHMattos/index.json --skip-duplicate
         
