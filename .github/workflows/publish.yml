@@ -31,5 +31,5 @@ jobs:
       run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:PackageVersion=${{github.event.inputs.version}} -p:OutputPath=.dist -t:restore -p:RestorePackagesConfig=true
 
     - name: Push
-      run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg --api-key ${{secrets.NUGET_API_KEY}} -s https://nuget.pkg.github.com/PauloHMattos/index.json --skip-duplicate
+      run: dotnet nuget push .dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg --api-key ${{secrets.NUGET_API_KEY}} -s https://nuget.pkg.github.com/PauloHMattos/index.json --skip-duplicate
         
