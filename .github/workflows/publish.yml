@@ -20,16 +20,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100
+        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
       
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
-      
-    - name: Pack
-      run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:PackageVersion=${{github.event.inputs.version}} -p:OutputPath=.dist -t:restore -p:RestorePackagesConfig=true
 
-    - name: Push
-      run: dotnet nuget push .dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg --api-key ${{secrets.NUGET_API_KEY}} -s https://nuget.pkg.github.com/PauloHMattos/index.json --skip-duplicate
-        
+    - name: Pack Managed Libraries
+      run: msbuild src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj /t:pack -p:Configuration=Release -p:OutputPath=.dist -p:PackageVersion=${{github.event.inputs.version}}
+
+    - name: Publish the package to GPR
+      run: dotnet nuget push src/ExceptionReporter.WinForms/.dist/ExceptionReporter.WinForms.${{github.event.inputs.version}}.nupkg
