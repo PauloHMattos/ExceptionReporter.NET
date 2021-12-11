@@ -25,7 +25,7 @@ jobs:
         dotnet-version: 5.0.100
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
 
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
