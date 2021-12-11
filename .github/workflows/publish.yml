@@ -23,9 +23,6 @@ jobs:
       uses: actions/setup-dotnet@v1.9.0
       with:
         dotnet-version: 5.0.100
-        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
     - name: Restore
       run: dotnet restore ExceptionReporter.NET.sln
@@ -34,7 +31,7 @@ jobs:
       run: dotnet pack src/ExceptionReporter.WinForms/ExceptionReporter.WinForms.csproj --configuration Release -p:PackageVersion=${{github.event.inputs.version}}
 
     - name: Publish the package to GPR
-      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" -k $NUGET_KEY -s $NUGET_SOURCE --skip-duplicate
+      run: dotnet nuget push "src/ExceptionReporter.WinForms/bin/Release/ExceptionReporter.${{github.event.inputs.version}}.nupkg" --api-key $NUGET_KEY --source $NUGET_SOURCE --skip-duplicate
       env:
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         NUGET_SOURCE: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
