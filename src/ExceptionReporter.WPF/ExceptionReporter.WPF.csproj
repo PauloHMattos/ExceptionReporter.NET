@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
@@ -21,6 +21,15 @@
     <Resource Include="Images\magnifying-glass.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" />
+    <ProjectReference Include="..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" PrivateAssets="All" />
   </ItemGroup>
+
+	<PropertyGroup>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+	</PropertyGroup>
+	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'all'))" />
+		</ItemGroup>
+	</Target>
 </Project>

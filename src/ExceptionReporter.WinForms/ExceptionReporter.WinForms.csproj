@@ -51,6 +51,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" />
+    <ProjectReference Include="..\ExceptionReporter.Shared\ExceptionReporter.Shared.csproj" PrivateAssets="All" />
   </ItemGroup>
 </Project>
