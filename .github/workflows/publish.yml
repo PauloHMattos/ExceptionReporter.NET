@@ -38,5 +38,5 @@ jobs:
       shell: pwsh
       
     - name: 'Dotnet NuGet Push'
-      run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+      run: dotnet nuget push src\ExceptionReporter.WinForms\bin\Release\ExceptionReporter.${{github.event.inputs.version}}.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
       shell: pwsh
